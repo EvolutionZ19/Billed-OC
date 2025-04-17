@@ -161,3 +161,16 @@ L'outil Chrome Debugger a été utilisé de manière intensive tout au long du p
   - Suivi de l’appel `updateBill()` (si implémenté) et retour à la vue principale
 - **Statut** : ✅ Fonctionnel
 - **Commit** : `test(debug): test de la fonctionnalité 'Accepter' une note`
+
+### ✅ Refus d’une note de frais
+
+- **Page** : /dashboard
+- **Comportement attendu** :
+  - Cliquer sur le bouton "Refuser" (`btn-refuse-bill-d`) modifie le statut de la note et ferme le formulaire
+  - L’icône `big-billed-icon` est visible dans la colonne de droite
+- **Debugger** :
+  - Point d’arrêt sur `handleRefuseSubmit(e, bill)`
+  - Vérification que `bill.status = "refused"`
+  - Confirmation que la vue revient bien au Dashboard (plus de formulaire visible)
+- **Statut** : ✅ Fonctionnel
+- **Commit** : `test(debug): test de la fonctionnalité 'Refuser' une note`
