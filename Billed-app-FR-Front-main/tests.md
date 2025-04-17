@@ -149,3 +149,15 @@ L'outil Chrome Debugger a été utilisé de manière intensive tout au long du p
 - **Statut** : ✅ Fonctionnel
 - **Commit** : `test(debug): vérification du formulaire pré-rempli à droite`
 
+### ✅ Acceptation d’une note de frais
+
+- **Page** : /dashboard
+- **Comportement attendu** :
+  - Cliquer sur le bouton "Accepter" (`btn-accept-bill-d`) modifie le statut de la note et ferme le formulaire
+  - L’icône `big-billed-icon` réapparaît dans la colonne droite
+- **Debugger** :
+  - Point d’arrêt sur `handleAcceptSubmit(e, bill)`
+  - Vérification de la valeur `bill.status = "accepted"`
+  - Suivi de l’appel `updateBill()` (si implémenté) et retour à la vue principale
+- **Statut** : ✅ Fonctionnel
+- **Commit** : `test(debug): test de la fonctionnalité 'Accepter' une note`
