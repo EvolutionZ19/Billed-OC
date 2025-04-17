@@ -67,3 +67,42 @@ describe("Given I am connected as an employee", () => {
     })
   })
 })
+
+// test bloque les fichiers non image si l'utilisateur essaye de les uploader
+test("Then only image files should be accepted in the justificatif field", () => {
+  document.body.innerHTML = `<div id="root"></div>`
+  router()
+  window.onNavigate(ROUTES_PATH.NewBill)
+
+  const mockStore = {
+    bills: () => ({
+      update: jest.fn().mockResolvedValue({}),
+      create: jest.fn().mockResolvedValue({}),
+      list: jest.fn().mockResolvedValue([]),
+    }),
+  }
+
+  const newBill = new NewBill({
+    document,
+    onNavigate: window.onNavigate,
+    store: mockStore,
+    localStorage: window.localStorage,
+  })
+
+  const fileInput = screen.getByTestId("file")
+
+  // Mock alert
+  window.alert = jest.fn()
+
+  const validFile = new File(["image"], "test.png", { type: "image/png" })
+  fireEvent.change(fileInput, { target: { files: [validFile] } })
+
+  expect(fileInput.files[0].name).toBe("test.png")
+  expect(window.alert).not.toHaveBeenCalled()
+
+  const invalidFile = new File(["document"], "test.pdf", { type: "application/pdf" })
+  fireEvent.change(fileInput, { target: { files: [invalidFile] } })
+
+  expect(fileInput.value).toBe("")
+  expect(window.alert).toHaveBeenCalled()
+})
