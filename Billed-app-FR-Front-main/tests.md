@@ -136,3 +136,16 @@ L'outil Chrome Debugger a été utilisé de manière intensive tout au long du p
   - Le `data-testid="dashboard-form"` devient visible
 - **Statut** : ✅ Fonctionnel
 - **Commit** : `test(debug): vérification ouverture des factures via open-bill`
+
+### ✅ Formulaire pré-rempli après sélection de facture
+
+- **Page** : /dashboard
+- **Comportement attendu** :
+  - Après clic sur une carte `open-bill<ID>`, un formulaire s’affiche avec les champs déjà remplis (nom, montant, type, justificatif…)
+- **Debugger** :
+  - Point d’arrêt dans `handleEditTicket()`
+  - Vérification que `document.querySelector("#dashboard-form")` contient les valeurs attendues
+  - Tous les champs (`input`, `textarea`, etc.) sont bien renseignés automatiquement
+- **Statut** : ✅ Fonctionnel
+- **Commit** : `test(debug): vérification du formulaire pré-rempli à droite`
+
