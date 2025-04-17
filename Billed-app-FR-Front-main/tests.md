@@ -110,3 +110,17 @@ L'outil Chrome Debugger a été utilisé de manière intensive tout au long du p
 - **Commit associé** : `fix: correction des sélecteurs pour la connexion admin`
 
 ---
+### ✅ Chargement du Dashboard (admin)
+
+- **Page** : /dashboard
+- **Comportement attendu** :
+  - L'admin est redirigé vers le dashboard après connexion
+  - Les notes de frais sont récupérées via `getBillsAllUsers()`
+  - Les sections sont visibles (En attente, Acceptée, Refusée)
+
+- **Debugger** :
+  - Point d’arrêt sur `getBillsAllUsers()` dans `Dashboard.js`
+  - Vérification du contenu de `snapshot` (tableau de 9 factures)
+
+- **Statut** : ✅ Fonctionnel
+- **Commit** : `test(debug): vérification affichage et chargement dashboard admin`
