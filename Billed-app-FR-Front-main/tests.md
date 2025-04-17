@@ -124,3 +124,15 @@ L'outil Chrome Debugger a été utilisé de manière intensive tout au long du p
 
 - **Statut** : ✅ Fonctionnel
 - **Commit** : `test(debug): vérification affichage et chargement dashboard admin`
+
+### ✅ Ouverture d’une facture (clic sur carte)
+
+- **Page** : /dashboard
+- **Comportement attendu** :
+  - Cliquer sur une carte `open-bill<ID>` affiche le formulaire de la note sélectionnée dans la colonne de droite
+- **Debugger** :
+  - Point d’arrêt dans `handleEditTicket()`
+  - Vérification que le `billId` correspond bien à la carte cliquée
+  - Le `data-testid="dashboard-form"` devient visible
+- **Statut** : ✅ Fonctionnel
+- **Commit** : `test(debug): vérification ouverture des factures via open-bill`
