@@ -106,3 +106,35 @@ test("Then only image files should be accepted in the justificatif field", () =>
   expect(fileInput.value).toBe("")
   expect(window.alert).toHaveBeenCalled()
 })
+
+// test pour vérifier que le fichier est uploadé et que l'alerte n'est pas appelée
+test("Then onNavigate should be called with Bills route after submit", () => {
+  document.body.innerHTML = `<div id="root"></div>`
+  router()
+  window.onNavigate(ROUTES_PATH.NewBill)
+
+  const mockNavigate = jest.fn()
+
+  const mockStore = {
+    bills: () => ({
+      update: jest.fn().mockResolvedValue({}),
+      create: jest.fn().mockResolvedValue({}),
+      list: jest.fn().mockResolvedValue([]),
+    }),
+  }
+
+  const newBill = new NewBill({
+    document,
+    onNavigate: mockNavigate,
+    store: mockStore,
+    localStorage: window.localStorage,
+  })
+
+  newBill.fileUrl = "https://localhost/fake.png"
+  newBill.fileName = "fake.png"
+
+  const form = screen.getByTestId("form-new-bill")
+  fireEvent.submit(form)
+
+  expect(mockNavigate).toHaveBeenCalledWith(ROUTES_PATH.Bills)
+})
