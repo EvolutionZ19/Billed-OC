@@ -66,3 +66,47 @@ L'outil Chrome Debugger a été utilisé de manière intensive tout au long du p
 - La console JS et les breakpoints ont permis de corriger les problèmes avant d'écrire les tests
 - Les tests ont ensuite été exécutés via `npm run test` pour valider les modifications apportées
 - Les tests de Jest ont été exécutés dans le terminal pour vérifier la couverture de code et les erreurs potentielles
+
+
+
+### Parcours Admin
+
+
+### ✅ Test manuel : Connexion Administrateur
+
+- **Page testée** : `/login`
+- **But** : Vérifier que le login admin fonctionne correctement (redirection + stockage utilisateur)
+- **Procédure** :
+  1. Aller sur la page `http://127.0.0.1:8080`
+  2. Dans le bloc "Administration", entrer :
+     - Email : `admin@test.tld`
+     - Mot de passe : admin
+  3. Cliquer sur "Se connecter"
+
+- **Comportement attendu** :
+  - Redirection vers la page Dashboard (`/dashboard`)
+  - La variable `localStorage.getItem("user")` doit contenir un objet avec :
+    ```json
+    {
+      "type": "Admin",
+      "email": "admin@test.tld",
+      "status": "connected"
+    }
+    ```
+
+- **Bug détecté au départ** :
+  - Les champs de formulaire utilisaient `employee-email-input` et `employee-password-input` au lieu de `admin-*`
+  - Cela provoquait une erreur `Cannot read properties of null (reading 'value')`
+
+- **Correction apportée** :
+  - Les sélecteurs de `handleSubmitAdmin` ont été modifiés :
+    ```js
+    email: e.target.querySelector(`input[data-testid="admin-email-input"]`).value,
+    password: e.target.querySelector(`input[data-testid="admin-password-input"]`).value,
+    ```
+
+- **Fichier modifié** : `src/containers/Login.js`
+
+- **Commit associé** : `fix: correction des sélecteurs pour la connexion admin`
+
+---
