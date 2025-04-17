@@ -174,3 +174,16 @@ L'outil Chrome Debugger a été utilisé de manière intensive tout au long du p
   - Confirmation que la vue revient bien au Dashboard (plus de formulaire visible)
 - **Statut** : ✅ Fonctionnel
 - **Commit** : `test(debug): test de la fonctionnalité 'Refuser' une note`
+
+### ✅ Ouverture du justificatif (icône œil)
+
+- **Page** : /dashboard
+- **Comportement attendu** :
+  - Cliquer sur l’icône `icon-eye-d` ouvre une modale affichant le justificatif lié à la note
+  - L’image du justificatif est bien visible dans la modale `modaleFileAdmin`
+- **Debugger** :
+  - Point d’arrêt dans `handleClickIconEye()`
+  - Vérification que l’URL du justificatif (`billUrl`) est correcte
+  - Suivi de l’ouverture de la modale Bootstrap via `$('#modaleFileAdmin').modal('show')`
+- **Statut** : ✅ Fonctionnel
+- **Commit** : `test(debug): ouverture de la modale justificatif via l’icône œil`
